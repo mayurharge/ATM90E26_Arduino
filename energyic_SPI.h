@@ -91,11 +91,23 @@ class ATM90E26_SPI
 		ATM90E26_SPI(int pin=energy_CS);
 		double  GetLineVoltage();
 		double GetLineCurrent();
-		double GetActivePower();
+		double GetLActivePower();
+		double GetLReactivePower();//new
+		double GetLApperantPower();//new
 		double GetFrequency();
-		double GetPowerFactor();
+		double GetLPowerFactor();
+		// new funtions
+		double GetPangleVLI();
+		double GetNutralCurrent();
+		double GetNActivePower();
+		double GetNReactivePower();
+		double GetNApparentPower();
+		double GetNPowerFactor();
+		double GetPangleVNI();
+
 		double GetImportEnergy();
 		double GetExportEnergy();
+
 		void SetUGain(unsigned short);
 		void SetLGain(unsigned short);
 		void SetIGain(unsigned short);

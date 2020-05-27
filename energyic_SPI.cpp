@@ -123,17 +123,64 @@ double ATM90E26_SPI::GetActivePower(){
 	return (double)apower;
 }
 
+double ATM90E26_SPI::GetLReactivePower(){
+	short int apower= (short int)CommEnergyIC(1,Qmean,0xFFFF); //Complement, MSB is signed bit
+	return (double)apower;
+}
+
+double ATM90E26_SPI::GetLApperantPower(){
+	short int apower= (short int)CommEnergyIC(1,Smean,0xFFFF); //Complement, MSB is signed bit
+	return (double)apower;
+}
+
 double ATM90E26_SPI::GetFrequency(){
 	unsigned short freq=CommEnergyIC(1,Freq,0xFFFF);
 	return (double)freq/100;
 }
 
-double ATM90E26_SPI::GetPowerFactor(){
+double ATM90E26_SPI::GetLPowerFactor(){
 	short int pf= (short int)CommEnergyIC(1,PowerF,0xFFFF); //MSB is signed bit
 	//if negative
 	if(pf&0x8000){
 		pf=(pf&0x7FFF)*-1;
 	}
+	return (double)pf/1000;
+}
+double ATM90E26_SPI::GetPangleVLI(){
+	short int pf= (short int)CommEnergyIC(1,Pangle,0xFFFF); //MSB is signed bit
+	return (double)pf/1000;
+}
+
+double ATM90E26_SPI::GetNutralCurrent(){
+	unsigned short current=CommEnergyIC(1,IrmsTwo,0xFFFF);
+	return (double)current/1000;
+}
+
+double ATM90E26_SPI::GetNActivePower(){
+	short int apower= (short int)CommEnergyIC(1,PmeanTwo,0xFFFF); //Complement, MSB is signed bit
+	return (double)apower;
+}
+
+double ATM90E26_SPI::GetNReactivePower(){
+	short int apower= (short int)CommEnergyIC(1,QmeanTwo,0xFFFF); //Complement, MSB is signed bit
+	return (double)apower;
+}
+
+double ATM90E26_SPI::GetNApparentPower(){
+	short int apower= (short int)CommEnergyIC(1,SmeanTwo,0xFFFF); //Complement, MSB is signed bit
+	return (double)apower;
+}
+
+double ATM90E26_SPI::GetNPowerFactor(){
+	short int pf= (short int)CommEnergyIC(1,PowerFTwo,0xFFFF); //MSB is signed bit
+	//if negative
+	if(pf&0x8000){
+		pf=(pf&0x7FFF)*-1;
+	}
+	return (double)pf/1000;
+}
+double ATM90E26_SPI::GetPangleVNI(){
+	short int pf= (short int)CommEnergyIC(1,PangleTwo,0xFFFF); //MSB is signed bit
 	return (double)pf/1000;
 }
 
